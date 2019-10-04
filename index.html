@@ -11,11 +11,13 @@
     <script>
         $(document).ready(function(){
           $("button").click(function(){
-            $.ajax({url: "https://chitter-backend-api.herokuapp.com/peeps", success: function(result){
-              $("#peep").html(result);
+            $.ajax({url: "https://chitter-backend-api.herokuapp.com/peeps",  success: function(result){
+              $("#peep").html(result[0].body);
+              console.log(result[0].body)
             }});
           });
         });
+      
         </script>
 </head>
 <body>
