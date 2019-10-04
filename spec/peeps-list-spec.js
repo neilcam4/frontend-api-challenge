@@ -12,3 +12,14 @@ describe('Get a peep from the API', function(){
         expect(peeplist[0]).toEqual(peep)
     })
 })
+
+describe('Get peep from API', function(){
+    it('should get peep and insert into DOM', function(){
+        peeplist = new PeepList()
+        console.log(this.list)
+        var peep = peeplist.getPeep()
+        this.list.push(peep)
+        expect(this.list.length).toEqual(1)
+    }
+    )
+})
