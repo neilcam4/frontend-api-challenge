@@ -15,12 +15,12 @@ function getPeeps(e){
             console.log(response)
             
             response.forEach(function(peep){  
-                output+=`<li>${peep.body}</li>`;
+                output+=`<div class="alert alert-info" role="alert">${peep.body}</div>`;
            });
           }  else {
                output +="<li>Something went wrong</li>"
            }
-           document.querySelector('.peeps').innerHTML = output;
+           document.querySelector('#peeps').innerHTML = output;
         }
     xhr.send()
 
