@@ -1,59 +1,57 @@
-$( document ).ready(function() {
-    
-document.querySelector('.get-jokes').addEventListener('click', getPeeps);
+// $( document ).ready(function() {
+// document.querySelector('.get-jokes').addEventListener('click', getPeeps);   
+// })
 
-function getPeeps(e){
-    
-    e.preventDefault();
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET',"https://chitter-backend-api.herokuapp.com/peeps", true );
-
-    xhr.onload = function(){
+(function(exports){
+    function getPeeps(){
+    fetch("https://chitter-backend-api.herokuapp.com/peeps")
+    .then(function(result){
+        return result.json()
+    })
+    .then(function(data){
         let output = '';
-        if(this.status ===200){
-            const response = JSON.parse(this.responseText);
-            console.log(response)
-            
-            response.forEach(function(peep){  
-                output+=`<div class="alert alert-info" role="alert">${peep.body}</div>`;
-           });
-          }  else {
-               output +="<li>Something went wrong</li>"
-           }
-           document.querySelector('#peeps').innerHTML = output;
-        }
-    xhr.send()
-
-
-}
-
-});
+        const response = data;
+        console.log(data)
+        response.forEach(function(peep){  
+         output+=`<div class="alert alert-info" role="alert">${peep.body}</div>`;
+        });
+            document.querySelector('#peeps').innerHTML = output;
+        })
+    .catch( function errorCall(){
+        console.log("error")}
+        )     
+    }
+exports.getPeeps = getPeeps;
+})(this)
 
 
 
-// (function(exports){
-//     function PeepList(){
-//         this.list =[]
-//         // var array = this.list
-//     }
+// (function(exports){ 
+//     function getPeeps(){
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('GET',"https://chitter-backend-api.herokuapp.com/peeps", true );
+    
+//         xhr.onload = function(){
+//             let output = '';
+//             if(this.status ===200){
+//                 const response = JSON.parse(this.responseText);
+//                 console.log(response)
+                
+//                 response.forEach(function(peep){  
+//                     output+=`<div class="alert alert-info" role="alert">${peep.body}</div>`;
+//                });
+//               }  else {
+//                    output +="<li>Something went wrong</li>"
+//                }
+//                document.querySelector('#peeps').innerHTML = output;
+//             }
+//         xhr.send()
+//     } 
+//     exports.getPeeps = getPeeps;
+// })(this) 
+  
 
-//     PeepList.prototype.getList = function(){
-//         return this.list
-//     }
-//     PeepList.prototype.getPeep = function(){
-//            var array = []
-//         $.ajax({url: "https://chitter-backend-api.herokuapp.com/peeps",  success: function(result){
-//             var json = result
-//             json.forEach(function(peep){  
-//             array.push(peep.body)
-//             });
-//             return array 
-//           }});
-//           console.log(array);
-//     }
-//     PeepList.prototype.getArray = function(){
-//         this.getPeep()
-//     }
-//     exports.PeepList = PeepList
-// })(this)
+
+
+
 
